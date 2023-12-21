@@ -40,3 +40,20 @@ body{
 .box-shadow{
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
+
+.mobile-toggle-btn{
+  span{
+    &:nth-child(1){
+      top: 0;
+      transform: translateY(0%);
+    }
+    &:nth-child(2){
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &:nth-child(3){
+      top: 100%;
+      transform: translateY(-100%);
+    }
+  }
+}
