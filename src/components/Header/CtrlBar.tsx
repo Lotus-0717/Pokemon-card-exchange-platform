@@ -12,9 +12,14 @@ function CtrlBar() {
   const toggleAccount = () => {
     setIsAccountVisible(!isAccountVisible);
   };
+
+  const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const toggleMobileMenu = () => {
+    setIsMobileMenu(!isMobileMenu);
+  };
   return (
     <div className="flex ctrl-bar items-center gap-4">
-      <nav className="flex gap-4">
+      <nav className={`${isMobileMenu ? '-active' : ''} hidden absolute top-14 left-0 w-full md:relative md:top-0 md:flex md:gap-4`}>
         <NavLink to="/">Index</NavLink>
         <NavLink to="/Store">Store</NavLink>
       </nav>
@@ -28,10 +33,10 @@ function CtrlBar() {
           <FontAwesomeIcon className="centered text-sm text-white " icon={faMagnifyingGlass} />
         </div>
       </div>
-      <div className="account-btn w-8 h-8 rounded-full bg-gray-400 relative cursor-pointer" onClick={toggleAccount}>
+      <div className={`account-btn w-8 h-8 rounded-full bg-gray-400 relative cursor-pointer shrink-0`} onClick={toggleAccount}>
           <FontAwesomeIcon className="centered text-lg text-white" icon={faUser} />
       </div>
-      <div className="mobile-toggle-btn md:hidden relative w-8 h-6 cursor-pointer">
+      <div className={`${isMobileMenu ? '-active' : ''} mobile-toggle-btn md:hidden relative w-8 h-6 cursor-pointer`} onClick={toggleMobileMenu}>
         <span className='block absolute top-0 bg-white w-full h-1 rounded-full'></span>
         <span className='block absolute top-0 bg-white w-full h-1 rounded-full'></span>
         <span className='block absolute top-0 bg-white w-full h-1 rounded-full'></span>

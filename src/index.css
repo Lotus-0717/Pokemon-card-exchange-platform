@@ -6,6 +6,12 @@ body{
   min-height: 100vh;
 }
 
+nav.-active{
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
 .nav-item{
   &:after{
     opacity: 0;
@@ -43,6 +49,7 @@ body{
 
 .mobile-toggle-btn{
   span{
+    transition: all .3s;
     &:nth-child(1){
       top: 0;
       transform: translateY(0%);
@@ -54,6 +61,23 @@ body{
     &:nth-child(3){
       top: 100%;
       transform: translateY(-100%);
+    }
+  }
+  &.-active{
+    span{
+      &:nth-child(1){
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+      &:nth-child(2){
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+      }
+      &:nth-child(3){
+        top: 50%;
+        transform: translateY(-50%) rotate(-45deg);
+      }
     }
   }
 }
