@@ -21,7 +21,7 @@ function CardItem({ name, pic, series, no }: CardItemProps) {
             <p className="text-white rounded-md border border-white p-1">{series}</p>
           </div>
         </div>
-        <ThemeButton className="max-w-36 min-w-28 w-full"></ThemeButton>
+        <ThemeButton className="max-w-36 min-w-28 w-full">前往挑選</ThemeButton>
       </div>
     </div>
   )

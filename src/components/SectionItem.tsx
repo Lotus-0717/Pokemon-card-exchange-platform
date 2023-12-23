@@ -15,7 +15,7 @@ function SectionItem({ tit, children }: SectionItemProps) {
       <div className="grid grid-cols-1 gap-y-12 gap-x-4 mb-10">
         {children}
       </div>
-      <ThemeButton className="w-full"></ThemeButton>
+      <ThemeButton className="w-full">看更多</ThemeButton>
     </section>
   )
 }

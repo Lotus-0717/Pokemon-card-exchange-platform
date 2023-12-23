@@ -1,9 +1,10 @@
 import SectionItem from '../components/SectionItem';
 import CardItem from '../components/CardItem';
-
+import SlideBanner from '../components/SlideBanner';
 function Index() {
   return (
     <div>
+      <SlideBanner></SlideBanner>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
         <SectionItem tit="最熱門釋出卡牌Top5">
           <CardItem name="走路草" pic="https://asia.pokemon-card.com/tw/card-img/tw00009029.png" series="SV4a" no="001/190"></CardItem>
