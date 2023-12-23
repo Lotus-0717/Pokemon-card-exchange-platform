@@ -7,8 +7,8 @@ body{
 }
 
 nav.-active{
-  @media (max-width: 768px) {
-    display: block;
+  @media (max-width: 767px ) {
+    display: flex;
   }
 }
 
