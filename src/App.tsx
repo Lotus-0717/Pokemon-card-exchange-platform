@@ -1,8 +1,9 @@
-import React from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Index from "./pages/Index";
 import Store from "./pages/Store";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/Store" element={<Store />} />
+        <Route path="/Login" element={<Login />} />
       </Routes>
       </main>
     </Router>
