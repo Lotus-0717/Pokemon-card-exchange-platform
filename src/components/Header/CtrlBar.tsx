@@ -36,10 +36,10 @@ function CtrlBar() {
           </div>
         </div>
       </nav>
-      <div className={`account-btn w-8 h-8 rounded-full bg-gray-400 relative cursor-pointer shrink-0`} onClick={toggleAccount}>
+      <div className={`account-btn w-8 h-8 rounded-full bg-gray-400 relative cursor-pointer shrink-0`} onClick={() => {toggleAccount(); setIsMobileMenu(false);}}>
         <FontAwesomeIcon className="centered text-lg text-white" icon={faUser} />
       </div>
-      <div className={`${isMobileMenu ? '-active' : ''} mobile-toggle-btn md:hidden relative w-8 h-6 cursor-pointer`} onClick={toggleMobileMenu}>
+      <div className={`${isMobileMenu ? '-active' : ''} mobile-toggle-btn md:hidden relative w-8 h-6 cursor-pointer`} onClick={() => {toggleMobileMenu(); setIsAccountVisible(false);}}>
         <span className='block absolute top-0 bg-white w-full h-1 rounded-full'></span>
         <span className='block absolute top-0 bg-white w-full h-1 rounded-full'></span>
         <span className='block absolute top-0 bg-white w-full h-1 rounded-full'></span>

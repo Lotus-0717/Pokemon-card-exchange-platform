@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeButton from "./themeButton";
+import ThemeButton from "./ThemeButton";
 interface SectionItemProps {
   tit: string;
   children: React.ReactNode;

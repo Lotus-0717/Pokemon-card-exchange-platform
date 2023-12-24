@@ -1,15 +1,23 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
-
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 function SlideBanner() {
   return (
     <div className='mb-10'>
       <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        loop={true}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
       >
         <SwiperSlide>
           <picture>

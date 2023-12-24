@@ -1,4 +1,4 @@
-import ThemeButton from "./themeButton";
+import ThemeButton from "./ThemeButton";
 
 interface CardItemProps {
   name: string;
