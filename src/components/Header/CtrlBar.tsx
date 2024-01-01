@@ -24,7 +24,8 @@ function CtrlBar() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const accountContainer = document.querySelector('.account-container');
-      if (accountContainer && !accountContainer.contains(event.target as Node)) {
+      const accountBtn = document.querySelector('.account-btn');
+      if (accountContainer && !accountContainer.contains(event.target as Node) && !accountBtn?.contains(event.target as Node)) {
         setIsAccountVisible(false);
       }
     }
