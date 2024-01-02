@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import SwiperContext from '../../Context'; 
 import { Link } from 'react-router-dom';
 import NavLink from "./NavLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +12,7 @@ interface AccountItemProps {
 }
 
 function CtrlBar() {
+  const swiperCtx = useContext(SwiperContext);
   const [isAccountVisible, setIsAccountVisible] = useState(false);
   const toggleAccount = () => {
     setIsAccountVisible(!isAccountVisible);
@@ -22,6 +24,11 @@ function CtrlBar() {
   };
 
   useEffect(() => {
+    console.log(swiperCtx.isSwiperInit)
+    if (!swiperCtx.isSwiperInit) {
+      return;
+    }
+
     function handleClickOutside(event: MouseEvent) {
       const accountContainer = document.querySelector('.account-container');
       const accountBtn = document.querySelector('.account-btn');
@@ -36,7 +43,7 @@ function CtrlBar() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [swiperCtx.isSwiperInit]);
 
   return (
     <div className="flex ctrl-bar items-center gap-4">

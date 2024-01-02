@@ -2,15 +2,12 @@ import SectionItem from '../components/SectionItem';
 import CardItem from '../components/CardItem';
 import UserItem from '../components/UserItem';
 import SlideBanner from '../components/SlideBanner';
-import { SwiperContextProvider } from '../Context';
 import CardData from '../data/CardData.json';
 import UserData from '../data/UserData.json';
 function Index() {
   return (
     <div>
-      <SwiperContextProvider>
-        <SlideBanner></SlideBanner>
-      </SwiperContextProvider>
+      <SlideBanner></SlideBanner>
       <div className="grid grid-cols-1 m-auto md:max-w-screen-lg md:grid-cols-2 gap-x-10">
         <SectionItem tit="最熱門釋出卡牌Top5">
           {CardData.slice(0, 5).map((item, index) => (
