@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 interface ButtonProps {
-  className: string,
+  className?: string
   children: React.ReactNode
 }
 function ThemeButton({ className = '', children }: ButtonProps) {

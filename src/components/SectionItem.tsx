@@ -3,9 +3,10 @@ import ThemeButton from "./ThemeButton";
 interface SectionItemProps {
   tit: string;
   children: React.ReactNode;
+  showButton?: boolean;
 }
 
-function SectionItem({ tit, children }: SectionItemProps) {
+function SectionItem({ tit, children, showButton = true }: SectionItemProps) {
   return (
     <section className="w-full mb-10">
       <div className="tit flex items-center mb-5">
@@ -15,7 +16,7 @@ function SectionItem({ tit, children }: SectionItemProps) {
       <div className="grid grid-cols-1 gap-y-12 gap-x-4 mb-10">
         {children}
       </div>
-      <ThemeButton className="w-full">看更多</ThemeButton>
+      {showButton && <ThemeButton className="w-full">看更多</ThemeButton>}
     </section>
   )
 }
