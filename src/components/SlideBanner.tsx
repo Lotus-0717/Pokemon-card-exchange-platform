@@ -1,9 +1,12 @@
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import SwiperContext from '../Context'; 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 function SlideBanner() {
+  const ctx = useContext(SwiperContext);
   return (
     <div className='mb-10'>
       <Swiper
@@ -18,6 +21,7 @@ function SlideBanner() {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
+        onInit={() => {ctx.onSwiperInit();}}
       >
         <SwiperSlide>
           <picture>
