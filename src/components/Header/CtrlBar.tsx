@@ -55,7 +55,7 @@ function CtrlBar() {
         </div>
         <div className="search-wrap relative order-1 w-full bg-white p-4 md:bg-transparent md:p-0">
           <input
-            className="focus-visible:outline-none w-full h-8 rounded-full pr-8 pl-4 border-2 box-border md:w-44 md:border-0"
+            className="focus-visible:outline-none w-full h-8 rounded-full pr-8 pl-4 border box-border md:w-44 md:border-0"
             type="text"
             placeholder="搜尋"
           />
@@ -75,7 +75,7 @@ function CtrlBar() {
       {isAccountVisible && (
         <div className="account-container box-shadow absolute top-16 right-8 border-box pt-1 pb-1 w-40 rounded-md bg-white">
           <ul>
-            <AccountItem path="./Login" onItemClicked={() => { setIsAccountVisible(false); }}>
+            <AccountItem path="/LogIn" onItemClicked={() => { setIsAccountVisible(false); }}>
               登入
             </AccountItem>
           </ul>
