@@ -3,6 +3,9 @@ export default {
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      translate: {
+        'full-plus-8': 'calc(100% + 2rem)',
+      },
       screens: {
         'xs': '400px'
       },

@@ -12,7 +12,7 @@ function App() {
     <Router>
       <SwiperContextProvider>
         <Header />
-        <main className="pt-20 pr-8 pl-8">
+        <main className="pt-20 px-4 md:px-8">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/Store" element={<Store />} />
