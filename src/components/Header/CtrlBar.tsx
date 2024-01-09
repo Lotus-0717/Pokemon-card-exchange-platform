@@ -50,8 +50,8 @@ function CtrlBar() {
       <nav className={`${isMobileMenu ? '-active' : ''} hidden absolute top-14 left-0 w-full flex-wrap md:flex-nowrap md:relative md:top-0 md:flex md:gap-4`}>
         <div className='fixed top-14 left-0 inset-0 bg-black/50 -z-10 md:hidden' onClick={toggleMobileMenu}></div>
         <div className='order-2 w-full md:flex md:gap-4 md:items-center'>
-          <NavLink event={toggleMobileMenu} to="/">Index</NavLink>
-          <NavLink event={toggleMobileMenu} to="/Store">Store</NavLink>
+          <NavLink event={() => {setIsMobileMenu(false);}} to="/">Index</NavLink>
+          <NavLink event={() => {setIsMobileMenu(false);}} to="/Store">Store</NavLink>
         </div>
         <div className="search-wrap relative order-1 w-full bg-white p-4 md:bg-transparent md:p-0">
           <input
