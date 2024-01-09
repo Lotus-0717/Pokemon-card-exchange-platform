@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import SwiperContext from '../../Context'; 
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import NavLink from "./NavLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +11,6 @@ interface AccountItemProps {
 }
 
 function CtrlBar() {
-  const swiperCtx = useContext(SwiperContext);
   const [isAccountVisible, setIsAccountVisible] = useState(false);
   const toggleAccount = () => {
     setIsAccountVisible(!isAccountVisible);
@@ -23,35 +21,13 @@ function CtrlBar() {
     setIsMobileMenu(!isMobileMenu);
   };
 
-  useEffect(() => {
-    console.log(swiperCtx.isSwiperInit)
-    if (!swiperCtx.isSwiperInit) {
-      return;
-    }
-
-    function handleClickOutside(event: MouseEvent) {
-      const accountContainer = document.querySelector('.account-container');
-      const accountBtn = document.querySelector('.account-btn');
-      if (accountContainer && !accountContainer.contains(event.target as Node) && !accountBtn?.contains(event.target as Node)) {
-        setIsAccountVisible(false);
-      }
-    }
-
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [swiperCtx.isSwiperInit]);
-
   return (
     <div className="flex ctrl-bar items-center gap-4">
       <nav className={`${isMobileMenu ? '-active' : ''} hidden absolute top-14 left-0 w-full flex-wrap md:flex-nowrap md:relative md:top-0 md:flex md:gap-4`}>
         <div className='fixed top-14 left-0 inset-0 bg-black/50 -z-10 md:hidden' onClick={toggleMobileMenu}></div>
         <div className='order-2 w-full md:flex md:gap-4 md:items-center'>
-          <NavLink event={() => {setIsMobileMenu(false);}} to="/">Index</NavLink>
-          <NavLink event={() => {setIsMobileMenu(false);}} to="/Store">Store</NavLink>
+          <NavLink event={() => { setIsMobileMenu(false); }} to="/">Index</NavLink>
+          <NavLink event={() => { setIsMobileMenu(false); }} to="/Store">Store</NavLink>
         </div>
         <div className="search-wrap relative order-1 w-full bg-white p-4 md:bg-transparent md:p-0">
           <input
@@ -73,12 +49,19 @@ function CtrlBar() {
         <span className='block absolute top-0 bg-white w-full h-1 rounded-full'></span>
       </div>
       {isAccountVisible && (
-        <div className="account-container box-shadow absolute top-16 right-8 border-box pt-1 pb-1 w-40 rounded-md bg-white">
-          <ul>
-            <AccountItem path="/LogIn" onItemClicked={() => { setIsAccountVisible(false); }}>
-              登入
-            </AccountItem>
-          </ul>
+        <div className='fixed top-0 left-0 w-full h-screen account-layer' onClick={(e) => {
+          const accountContainer = document.querySelector('.account-container');
+          if(!accountContainer?.contains(e.target as Node)) {
+            setIsAccountVisible(false);
+          }
+        }}>
+          <div className="account-container box-shadow absolute top-16 right-8 border-box pt-1 pb-1 w-40 rounded-md bg-white">
+            <ul>
+              <AccountItem path="/LogIn" onItemClicked={() => { setIsAccountVisible(false); }}>
+                登入
+              </AccountItem>
+            </ul>
+          </div>
         </div>
       )}
     </div>
