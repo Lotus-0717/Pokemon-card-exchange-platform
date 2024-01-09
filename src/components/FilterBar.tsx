@@ -14,22 +14,25 @@ function FilterBar() {
   const [filterArray, setFilterArray] = useState<string[]>([]);
   return (
     <div className={`relative mb-4`}>
-      <div className="bg-gray-200 p-4 cursor-pointer rounded-xl">
-        <div className="flex items-center justify-between" onClick={() => { setIsFilterOpen(!isFilterOpen) }}>
+      <div className="bg-gray-200 p-4 rounded-xl">
+        <div className="flex items-center justify-between cursor-pointer" onClick={() => { setIsFilterOpen(!isFilterOpen) }}>
           <div className="flex items-center gap-2">
             <p>篩選條件</p>
             <FontAwesomeIcon icon={faFilter} />
           </div>
           <FontAwesomeIcon icon={faChevronUp} className={`${isFilterOpen ? 'rotate-0' : 'rotate-180'}`} />
         </div>
-        <div className={`${filterArray.length !== 0 ? 'flex' : 'hidden'} gap-2 py-2`}>
+        <div className={`${filterArray.length !== 0 ? 'flex' : 'hidden'} gap-2 py-2 flex-wrap`}>
           {filterArray.map(item => (
-            <div className={`px-4 py-2 bg-lightBlue text-white rounded-full`} onClick={() => {
-              filterArray.includes(item) 
-              ? setFilterArray(filterArray.filter(currentItem => currentItem !== item)) 
-              : setFilterArray([...filterArray, item]);
+            <div className={`px-4 py-2 bg-lightBlue text-white rounded-full cursor-pointer`} onClick={() => {
+              filterArray.includes(item)
+                ? setFilterArray(filterArray.filter(currentItem => currentItem !== item))
+                : setFilterArray([...filterArray, item]);
             }}>{item} <FontAwesomeIcon icon={faXmark} /></div>
           ))}
+        </div>
+        <div className={`${filterArray.length !== 0 ? 'block' : 'hidden'} bg-lightBlue px-4 py-2 text-white rounded-full cursor-pointer`} onClick={() => setFilterArray([])}>
+          <p>清空</p>
         </div>
         <div className={`${isFilterOpen ? 'block' : 'hidden'} bg-gray-200 w-full`}>
           <FilterCategory
@@ -57,18 +60,18 @@ function FilterBar() {
 function FilterCategory({ className = '', tit, obj, filterArray, setFilterArray }: FilterCategoryProps) {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   return (
-    <div className="py-2 border-b border-white last:border-b-0">
+    <div className="py-2 border-b border-white last:border-b-0 cursor-pointer">
       <div className="flex items-center gap-2" onClick={() => setIsCategoryOpen(!isCategoryOpen)}>
         <p>{tit}</p>
         <div className={`toggle-plus w-3 h-3 ${isCategoryOpen ? '-active' : ''}`}></div>
       </div>
-      <div className={`${isCategoryOpen ? 'flex' : 'hidden'} gap-2 mt-2`}>
+      <div className={`${isCategoryOpen ? 'flex' : 'hidden'} gap-2 mt-2 flex-wrap`}>
         {
           obj.map(item => (
             <div className={`${className} ${filterArray.includes(item) ? 'bg-lightBlue' : 'bg-gray-400'} px-4 py-2 text-white rounded-full`} onClick={() => {
-              filterArray.includes(item) 
-              ? setFilterArray(filterArray.filter(currentItem => currentItem !== item)) 
-              : setFilterArray([...filterArray, item]);
+              filterArray.includes(item)
+                ? setFilterArray(filterArray.filter(currentItem => currentItem !== item))
+                : setFilterArray([...filterArray, item]);
             }}>{item}</div>
           ))
         }
