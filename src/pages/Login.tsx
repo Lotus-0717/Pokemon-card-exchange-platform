@@ -12,7 +12,6 @@ function LogIn() {
   const navigate = useNavigate();
   const googleLogin = async () => {
     const result = await signInWithPopup(auth, provide);
-    console.log(result)
     setUserData({
       isLogin: true,
       userPhoto: result.user?.photoURL || '',

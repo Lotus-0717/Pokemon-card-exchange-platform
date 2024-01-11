@@ -1,6 +1,6 @@
 import { auth } from "./config/firebase";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UserData from "./context";
 import Header from "./components/Header/Header";
 import Index from "./pages/Index";
@@ -9,17 +9,45 @@ import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 
 function App() {
-  const [userData, setUserData] = useState({
-    isLogin: auth.currentUser?.displayName ? true : false,
-    userPhoto: auth.currentUser?.photoURL ? auth.currentUser?.photoURL : '',
-    userName: auth.currentUser?.displayName ? auth.currentUser?.displayName : '',
-    userEmail: auth.currentUser?.email ? auth.currentUser?.email : '',
-    userId: auth.currentUser?.uid ? auth.currentUser?.uid : '',
+  console.log(auth);
+  const [Data, setUserData] = useState({
+    isLogin: false,
+    userPhoto: '',
+    userName: '',
+    userEmail: '',
+    userId: ''
   });
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        // User is signed in.
+        setUserData({
+          isLogin: true,
+          userPhoto: user.photoURL || '',
+          userName: user.displayName || '',
+          userEmail: user.email || '',
+          userId: user.uid || ''
+        });
+      } else {
+        // User is signed out.
+        setUserData({
+          isLogin: false,
+          userPhoto: '',
+          userName: '',
+          userEmail: '',
+          userId: ''
+        });
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <Router>
-      <UserData.Provider value={{ userData, setUserData }}>
+      <UserData.Provider value={{ Data, setUserData }}>
         <Header />
         <main className="pt-20 px-4 md:px-8">
           <Routes>

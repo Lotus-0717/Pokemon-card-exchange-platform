@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import UserData from '../context';
 import SectionItem from '../components/SectionItem';
 import {TopFiveCardItem} from '../components/CardItem';
 import UserItem from '../components/UserItem';
@@ -7,24 +5,8 @@ import SlideBanner from '../components/SlideBanner';
 import CardData from '../data/CardData.json';
 import UserListData from '../data/UserListData.json';
 function Index() {
-  const userData = useContext(UserData);
   return (
     <div>
-      {
-        userData.userData.isLogin
-      }
-      {
-        userData.userData.userEmail
-      }
-      {
-        userData.userData.userId
-      }
-      {
-        userData.userData.userName
-      }
-      {
-        userData.userData.userPhoto
-      }
       <SlideBanner></SlideBanner>
       <div className="grid grid-cols-1 m-auto md:max-w-screen-lg md:grid-cols-2 gap-x-10">
         <SectionItem tit="最熱門釋出卡牌Top5">

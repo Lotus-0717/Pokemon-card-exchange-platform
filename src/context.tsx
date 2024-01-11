@@ -2,18 +2,18 @@
 import { createContext } from "react";
 
 type UserDataContextType = {
-  userData: {
+  Data: {
     isLogin: boolean;
     userPhoto: string;
     userName: string;
     userEmail: string;
     userId: string;
   };
-  setUserData: (value: UserDataContextType['userData']) => void;
+  setUserData: (value: UserDataContextType['Data']) => void;
 };
 
 const UserData = createContext<UserDataContextType>({
-  userData: {
+  Data: {
     isLogin: false,
     userPhoto: '',
     userName: '',

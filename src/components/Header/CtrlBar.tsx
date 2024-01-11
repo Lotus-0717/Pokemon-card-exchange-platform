@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import NavLink from "./NavLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faUser, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-
-const memberInfo = {
-  status: false,
-  userImg: 'https://fakeimg.pl/300x300/'
-};
+import { getAuth, signOut } from "firebase/auth";
+import UserData from '../../context';
 
 interface AccountItemProps {
   className?: string,
@@ -17,6 +14,7 @@ interface AccountItemProps {
 }
 
 function CtrlBar() {
+  const userData = useContext(UserData);
   const [isAccountVisible, setIsAccountVisible] = useState(false);
   const toggleAccount = () => {
     setIsAccountVisible(!isAccountVisible);
@@ -42,17 +40,17 @@ function CtrlBar() {
             placeholder="搜尋"
           />
           <div className="y-centered right-5 w-6 h-6 rounded-full bg-gray-400 cursor-pointer md:right-1">
-              <FontAwesomeIcon className="centered text-sm text-white " icon={faMagnifyingGlass} />
+            <FontAwesomeIcon className="centered text-sm text-white " icon={faMagnifyingGlass} />
           </div>
         </div>
       </nav>
       <div className={`account-btn w-8 h-8 rounded-full overflow-hidden bg-gray-400 relative cursor-pointer shrink-0`} onClick={() => { toggleAccount(); setIsMobileMenu(false); }}>
 
         {
-          memberInfo.status ?
+          userData.Data.userPhoto ?
             (
               <div>
-                <img src={memberInfo.userImg} alt="" />
+                <img src={userData.Data.userPhoto} alt="" />
               </div>
             )
             :
@@ -75,7 +73,7 @@ function CtrlBar() {
         }}>
           <div className="account-container box-shadow absolute top-16 right-8 border-box pt-1 pb-1 w-40 rounded-md bg-white">
             {
-              memberInfo.status ?
+              userData.Data.isLogin ?
                 (
                   <ul>
                     <AccountItem path="/" onItemClicked={() => { setIsAccountVisible(false); }}>
@@ -87,7 +85,24 @@ function CtrlBar() {
                     <AccountItem path="/" onItemClicked={() => { setIsAccountVisible(false); }}>
                       <p>追蹤清單</p>
                     </AccountItem>
-                    <AccountItem className='text-red-500' path="/" onItemClicked={() => { setIsAccountVisible(false); }}>
+                    <AccountItem className='text-red-500' path="/" onItemClicked={() => {
+                      const result = confirm('是否登出？');
+                      const auth = getAuth();
+                      if (result) {
+                        signOut(auth).then(() => {
+                          userData.setUserData({
+                            isLogin: false,
+                            userPhoto: '',
+                            userName: '',
+                            userEmail: '',
+                            userId: ''
+                          })
+                        }).catch((error) => {
+                          console.log(error);
+                        });
+                      }
+                      setIsAccountVisible(false);
+                    }}>
                       <p>登出</p>
                     </AccountItem>
                   </ul>
