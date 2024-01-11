@@ -1,9 +1,27 @@
+import { useContext } from "react";
+import UserData from "../context";
 import ThemeButton, { SocialLogInButton } from "../components/ThemeButton";
-import { Link } from 'react-router-dom';
-import fbIcon from '../assets/fb.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth, provide } from '../config/firebase';
+import { signInWithPopup } from "firebase/auth";
+// import fbIcon from '../assets/fb.svg';
 import googleIcon from '../assets/google.svg';
 
 function LogIn() {
+  const { setUserData } = useContext(UserData);
+  const navigate = useNavigate();
+  const googleLogin = async () => {
+    const result = await signInWithPopup(auth, provide);
+    console.log(result)
+    setUserData({
+      isLogin: true,
+      userPhoto: result.user?.photoURL || '',
+      userName: result.user?.displayName || '',
+      userEmail: result.user?.email || '',
+      userId: result.user?.uid || ''
+    })
+    navigate('/');
+  }
   return (
     <div>
       <div className="shadow-lg p-4 rounded-lg max-w-xs m-auto border">
@@ -29,17 +47,17 @@ function LogIn() {
               <div className="w-5">
                 <img src={googleIcon} alt="" />
               </div>
-              <p>使用Google登入</p>
+              <p onClick={googleLogin}>使用Google登入</p>
             </div>
           </SocialLogInButton>
-          <SocialLogInButton className="mb-4">
+          {/* <SocialLogInButton className="mb-4">
             <div className="flex">
               <div className="w-5">
                 <img src={fbIcon} alt="" />
               </div>
               <p>使用Facebook登入</p>
             </div>
-          </SocialLogInButton>
+          </SocialLogInButton> */}
 
         </div>
         <div className="text-center text-lightBlue">
