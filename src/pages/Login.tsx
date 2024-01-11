@@ -41,12 +41,12 @@ function LogIn() {
           <div className="text-center midline mb-4">
             <p className=" text-gray-500">快速登入</p>
           </div>
-          <SocialLogInButton className="mb-2">
+          <SocialLogInButton className="mb-2" onClicked={() => {googleLogin()}}>
             <div className="flex">
               <div className="w-5">
                 <img src={googleIcon} alt="" />
               </div>
-              <p onClick={googleLogin}>使用Google登入</p>
+              <p>使用Google登入</p>
             </div>
           </SocialLogInButton>
           {/* <SocialLogInButton className="mb-4">
